@@ -1,4 +1,4 @@
---- A Simple Pong Game
+-- A Simple Pong Game
 
 local Player = require("player")
 
@@ -14,7 +14,16 @@ function love.load()
     vsync = true
   })
 
-  player = Player:new(WINDOW_HEIGHT)
+  player = Player:new()
+end
+
+function love.update(dt)
+  -- Exit on 'Esc'
+  if love.keyboard.isDown("escape") then
+    os.exit()
+  end
+
+  player:updateMovement(dt)
 end
 
 function love.draw()
