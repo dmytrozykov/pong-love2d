@@ -8,6 +8,7 @@ WINDOW_HEIGHT = 720
 local player
 
 function love.load()
+  love.window.setTitle("Pong")
   love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {
     fullscreen = false,
     resizable = false,
