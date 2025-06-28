@@ -1,7 +1,7 @@
+local Paddle = require("paddle")
+
 local Opponent = {}
 Opponent.__index = Opponent
-
-local Paddle = require("paddle")
 
 function Opponent:new()
   local width, height, _ = love.window.getMode()

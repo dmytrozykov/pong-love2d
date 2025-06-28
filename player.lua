@@ -7,7 +7,8 @@ function Player:new()
   local width, height, _ = love.window.getMode()
 
   self = setmetatable({}, Player)
-  self.paddle = Paddle:new(width * 0.05, 0)
+  self.paddle = Paddle:new(0, 0)
+  self.paddle.x = width * 0.05 - self.paddle.width
   self.paddle.y = height / 2 - self.paddle.height / 2
   self.speed = 350
 

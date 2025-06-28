@@ -2,11 +2,13 @@
 
 local Player = require("player")
 local Opponent = require("opponent")
+local Ball = require("ball")
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
 local player, opponent
+local ball
 
 function love.load()
   love.window.setTitle("Pong")
@@ -18,6 +20,8 @@ function love.load()
 
   player = Player:new()
   opponent = Opponent:new()
+
+  ball = Ball:new()
 end
 
 function love.update(dt)
@@ -32,5 +36,6 @@ end
 function love.draw()
   player:draw()
   opponent:draw()
+  ball:draw()
 end
 
