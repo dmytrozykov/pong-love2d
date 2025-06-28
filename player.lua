@@ -4,12 +4,13 @@ local Player = {}
 Player.__index = Player
 
 function Player:new()
-  local _, height, _ = love.window.getMode()
+  local width, height, _ = love.window.getMode()
 
   self = setmetatable({}, Player)
-  self.paddle = Paddle:new(20, 0)
+  self.paddle = Paddle:new(width * 0.05, 0)
   self.paddle.y = height / 2 - self.paddle.height / 2
   self.speed = 350
+
   return self
 end
 

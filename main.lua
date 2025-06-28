@@ -1,11 +1,12 @@
 -- A Simple Pong Game
 
 local Player = require("player")
+local Opponent = require("opponent")
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
-local player
+local player, opponent
 
 function love.load()
   love.window.setTitle("Pong")
@@ -16,6 +17,7 @@ function love.load()
   })
 
   player = Player:new()
+  opponent = Opponent:new()
 end
 
 function love.update(dt)
@@ -29,5 +31,6 @@ end
 
 function love.draw()
   player:draw()
+  opponent:draw()
 end
 
