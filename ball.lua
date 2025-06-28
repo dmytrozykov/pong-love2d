@@ -5,9 +5,9 @@ function Ball:new()
   local width, height, _ = love.window.getMode()
 
   self = setmetatable({}, Ball)
-  self.x = width / 2
-  self.y = height / 2
   self.size = 24
+  self.x = width / 2 - self.size / 2
+  self.y = height / 2 - self.size / 2
 
   return self
 end
