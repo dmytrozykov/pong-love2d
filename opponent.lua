@@ -1,8 +1,12 @@
 local Paddle = require("paddle")
 
+---@class Opponent
+---@field paddle Paddle
+---@field speed number
 local Opponent = {}
 Opponent.__index = Opponent
 
+---@return Opponent
 function Opponent:new()
   local width, height, _ = love.window.getMode()
 

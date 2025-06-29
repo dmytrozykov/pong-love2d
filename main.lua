@@ -8,7 +8,12 @@ local Font = require("font")
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
-local player, opponent
+---@type Player
+local player
+
+---@type Opponent
+local opponent
+
 ---@type Ball
 local ball
 
@@ -33,6 +38,8 @@ function love.update(dt)
   if love.keyboard.isDown("escape") then
     os.exit()
   end
+
+  ball:checkCollisions(player.paddle, opponent.paddle)
 
   player:updateMovement(dt)
   ball:updateMovement(dt)

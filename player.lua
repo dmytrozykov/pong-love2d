@@ -1,8 +1,13 @@
 local Paddle = require("paddle")
 
+---@class Player
+---
+---@field paddle Paddle
+---@field speed number
 local Player = {}
 Player.__index = Player
 
+---@return Player
 function Player:new()
   local width, height, _ = love.window.getMode()
 
@@ -19,6 +24,7 @@ function Player:draw()
   self.paddle:draw()
 end
 
+---@param dt number
 function Player:updateMovement(dt)
   local _, height, _ = love.window.getMode()
 

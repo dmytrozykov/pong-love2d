@@ -1,6 +1,16 @@
+---@class Paddle
+---
+---@field x number
+---@field y number
+---
+---@field width number
+---@field height number
 local Paddle = {}
 Paddle.__index = Paddle
 
+---@param x number 
+---@param y number
+---@return Paddle
 function Paddle:new(x, y)
   self = setmetatable({}, Paddle)
   self.x = x
