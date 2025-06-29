@@ -64,6 +64,8 @@ function love.update(dt)
   elseif currentState == state.PLAY then
     player:updateMovement(dt)
 
+    opponent:updateMovement(dt, ball)
+
     ball:checkCollisions(player.paddle, opponent.paddle)
     ball:updateMovement(dt)
 
