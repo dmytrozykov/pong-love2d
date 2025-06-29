@@ -9,13 +9,13 @@ local Font = require("font")
 local state = {
   SERVE = "serve",
   PLAY = "play",
-  WIN = "win"
+  WIN = "win",
 }
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
-MAX_SCORE = 2
+MAX_SCORE = 9
 
 ---@type Player
 local player
@@ -73,10 +73,10 @@ function love.update(dt)
     local width, _, _ = love.window.getMode()
     if ball.x < 0 then
       score[2] = score[2] + 1
-      ball:resetPosition()
+      ball:reset(true)
     elseif ball.x > width - ball.size then
       score[1] = score[1] + 1
-      ball:resetPosition()
+      ball:reset(false)
     end
 
     if score[1] == MAX_SCORE then
@@ -86,7 +86,7 @@ function love.update(dt)
       currentState = state.WIN
       isFirstServing = true
     end
-  elseif currentState == state.WIN then
+ elseif currentState == state.WIN then
     if love.keyboard.isDown("space") then
       currentState = state.SERVE
       reset()
@@ -134,12 +134,13 @@ end
 
 local function drawWinText()
   local font = Font.messageFont
-  local text = "Game Over"
+  local text = (isFirstServing and "P2" or "P1") .. " Won"
   local textWidth = font:getWidth(text)
+  local textHeight = font:getHeight(text)
 
   local width, height, _ = love.window.getMode()
   local x = width / 2 - textWidth / 2
-  local y = height / 2
+  local y = height / 2 - textHeight / 2
 
   love.graphics.setFont(font)
   love.graphics.print(text, x, y)
@@ -150,6 +151,7 @@ function love.draw()
     drawServeText()
   elseif currentState == state.WIN then
     drawWinText()
+    return
   end
 
   drawScore()

@@ -9,7 +9,7 @@ Opponent.__index = Opponent
 ---@return Opponent
 function Opponent:new()
   self = setmetatable({}, Opponent)
-  self.speed = 200
+  self.speed = 120
   self:reset()
   return self
 end
