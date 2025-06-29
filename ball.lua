@@ -78,7 +78,6 @@ function Ball:checkCollisions(leftPaddle, rightPaddle)
   local _, height, _ = love.window.getMode()
   -- bounce of walls
   if self.y >= height - self.size or self.y <= 0 then
-    print("collided")
     self.velocity.y = -self.velocity.y
   end
 end
