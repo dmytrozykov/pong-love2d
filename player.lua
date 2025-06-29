@@ -9,19 +9,21 @@ Player.__index = Player
 
 ---@return Player
 function Player:new()
-  local width, height, _ = love.window.getMode()
-
   self = setmetatable({}, Player)
   self.paddle = Paddle:new(0, 0)
-  self.paddle.x = width * 0.05 - self.paddle.width
-  self.paddle.y = height / 2 - self.paddle.height / 2
+  self:reset()
   self.speed = 350
-
   return self
 end
 
 function Player:draw()
   self.paddle:draw()
+end
+
+function Player:reset()
+  local width, height, _ = love.window.getMode()
+  self.paddle.x = width * 0.05 - self.paddle.width
+  self.paddle.y = height / 2 - self.paddle.height / 2
 end
 
 ---@param dt number

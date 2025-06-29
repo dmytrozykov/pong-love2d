@@ -13,11 +13,17 @@ Ball.__index = Ball
 ---@param isFirstServing boolean
 ---@return Ball
 function Ball:new(isFirstServing)
-
   self = setmetatable({}, Ball)
-
   self.size = 24
-  self:resetPosition()
+  self:reset(isFirstServing)
+  return self
+end
+
+---@param isFirstServing boolean
+function Ball:reset(isFirstServing)
+  local width, height, _ = love.window.getMode()
+  self.x = width / 2 - self.size / 2
+  self.y = height / 2 - self.size / 2
 
   local initialSpeed = 200
 
@@ -26,14 +32,6 @@ function Ball:new(isFirstServing)
     x = (isFirstServing and -1 or 1) * initialSpeed,
     y = 0
   }
-
-  return self
-end
-
-function Ball:resetPosition()
-  local width, height, _ = love.window.getMode()
-  self.x = width / 2 - self.size / 2
-  self.y = height / 2 - self.size / 2
 end
 
 function Ball:draw()
