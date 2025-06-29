@@ -38,22 +38,37 @@ function Ball:draw()
   love.graphics.rectangle("fill", self.x, self.y, self.size, self.size)
 end
 
+---@param y number
+---@param height number
+---@return boolean
+function Ball:getTopSideCollision(y, height)
+  return self.y >= y and self.y <= y + height
+end
+
+---@param y number
+---@param height number
+---@return boolean
+function Ball:getBottomSideCollision(y, height)
+  local refPoint = self.y + self.size
+  return refPoint >= y and refPoint <= y + height
+end
+
 ---@param leftPaddle Paddle 
 ---@param rightPaddle Paddle
 function Ball:checkCollisions(leftPaddle, rightPaddle)
    -- check left collision
-  local leftHit = (
-     self.x <= leftPaddle.x + leftPaddle.width and
-     self.y >= leftPaddle.y and self.y <= leftPaddle.y + leftPaddle.height
+  local leftHit = self.x <= leftPaddle.x + leftPaddle.width and (
+     self:getTopSideCollision(leftPaddle.y, leftPaddle.height) or
+     self:getBottomSideCollision(leftPaddle.x, leftPaddle.height)
   )
 
   -- check right collision
-  local rightHit = (
-    self.x >= rightPaddle.x - self.size and
-    self.y >= rightPaddle.y and self.y <= rightPaddle.y + rightPaddle.height
+  local rightHit = self.x >= rightPaddle.x - self.size and (
+    self:getTopSideCollision(rightPaddle.y, rightPaddle.height) or
+    self:getBottomSideCollision(rightPaddle.y, rightPaddle.height)
   )
 
-  local hasCollided = leftHit or rightHit 
+  local hasCollided = leftHit or rightHit
 
   if hasCollided then
     -- mirror horizontal movement and increase velocity
