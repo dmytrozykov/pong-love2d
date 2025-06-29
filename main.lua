@@ -9,6 +9,7 @@ WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
 local player, opponent
+---@type Ball
 local ball
 
 local score = { 0, 0 }
@@ -24,7 +25,7 @@ function love.load()
   player = Player:new()
   opponent = Opponent:new()
 
-  ball = Ball:new()
+  ball = Ball:new(true)
 end
 
 function love.update(dt)
@@ -34,6 +35,7 @@ function love.update(dt)
   end
 
   player:updateMovement(dt)
+  ball:updateMovement(dt)
 end
 
 local function drawScore()
