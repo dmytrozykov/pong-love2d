@@ -73,10 +73,10 @@ function love.update(dt)
     local width, _, _ = love.window.getMode()
     if ball.x < 0 then
       score[2] = score[2] + 1
-      ball:reset(true)
+      ball:resetPosition()
     elseif ball.x > width - ball.size then
       score[1] = score[1] + 1
-      ball:reset(false)
+      ball:resetPosition()
     end
 
     if score[1] == MAX_SCORE then

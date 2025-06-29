@@ -19,11 +19,15 @@ function Ball:new(isFirstServing)
   return self
 end
 
----@param isFirstServing boolean
-function Ball:reset(isFirstServing)
+function Ball:resetPosition()
   local width, height, _ = love.window.getMode()
   self.x = width / 2 - self.size / 2
   self.y = height / 2 - self.size / 2
+end
+
+---@param isFirstServing boolean
+function Ball:reset(isFirstServing)
+  self:resetPosition()
 
   local initialSpeed = 200
 
@@ -59,7 +63,7 @@ function Ball:checkCollisions(leftPaddle, rightPaddle)
    -- check left collision
   local leftHit = self.x <= leftPaddle.x + leftPaddle.width and (
      self:getTopSideCollision(leftPaddle.y, leftPaddle.height) or
-     self:getBottomSideCollision(leftPaddle.x, leftPaddle.height)
+     self:getBottomSideCollision(leftPaddle.y, leftPaddle.height)
   )
 
   -- check right collision
@@ -72,7 +76,7 @@ function Ball:checkCollisions(leftPaddle, rightPaddle)
 
   if hasCollided then
     -- mirror horizontal movement and increase velocity
-    self.velocity.x = self.velocity.x * -1.03
+    self.velocity.x = self.velocity.x * -1.05
 
     -- add random vertical velocity
     self.velocity.y = (self.velocity.y < 0 and -1 or 1) * math.random(10, 150)
